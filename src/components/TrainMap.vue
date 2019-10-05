@@ -2,7 +2,7 @@
   <div>
     <AppHeader pageTitle="Map" />
     <div id="mapContainer">
-      <iframe src="./static/2017-System-Map.pdf" frameborder="0"></iframe>
+      <iframe src="../static/2019-System-Map.pdf" frameborder="0"></iframe>
     </div>
   </div>
 </template>
