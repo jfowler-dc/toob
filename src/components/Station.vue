@@ -39,6 +39,9 @@ import axios from 'axios';
 import Train from '@/components/Train'
 import AppHeader from '@/components/AppHeader'
 
+// need to rework a lot of things in this component... its been so long 
+// since I wrote this I can't remember my thought process :(
+
 
 export default {
   name: 'Station',

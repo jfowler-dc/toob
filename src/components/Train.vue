@@ -136,6 +136,7 @@ h4 {display:flex; width:100%; align-items:center; font-size:19px; font-weight:bo
 a {text-decoration:none; width:100%; color:#000;}
 span.lines {margin-left:auto; display:flex; align-items:center;}
 span.line {color:#fff; margin-right:10px; display:flex; box-sizing:border-box; align-items:center; justify-content:center; border-radius:100%; min-width:20px; min-height:20px; max-width:20px; max-height:20px;}
+span.line:last-child {margin-right:0;}
 .line.RD {background:#CB0A0A;}
 .line.BL {background:#2856D1;}
 .line.YL {background:#E6EF0B; color:#000;}
