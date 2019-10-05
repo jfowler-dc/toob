@@ -1,6 +1,6 @@
 # toob
 
-> A Vue.js project
+> WMATA Next Train Times App
 
 ## Build Setup
 
