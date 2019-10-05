@@ -15,13 +15,13 @@
       </div>
     </div>
 	  <div id="trains">
-      <HelloWorld v-for="(s, index) in sortedArray" :key="index" :stationName="s.Name" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :link="true" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" /> 
+      <Train v-for="(s, index) in sortedArray" :key="index" :stationName="s.Name" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :link="true" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" /> 
     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld'
+import Train from '@/components/Train'
 import AppHeader from '@/components/AppHeader'
 
 import axios from 'axios';
@@ -162,7 +162,7 @@ export default {
     }
   },
   components: {
-    HelloWorld,
+    Train,
     AppHeader
   }
 }

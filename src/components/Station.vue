@@ -2,7 +2,7 @@
   <div>
     <AppHeader v-if="allStations.length > 0" :pageTitle="allStations[0].Name" hamburger="true" />
     <div id="station">
-      <HelloWorld v-for="(s, index) in allStations" :key="index" v-if="s.Code == stationId" :link="false" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :stationName="s.Name" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" />
+      <Train v-for="(s, index) in allStations" :key="index" v-if="s.Code == stationId" :link="false" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :stationName="s.Name" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" />
     </div>
     <!-- <div class="grid" v-if="stationTimes.length > 0">
       <p>
@@ -36,7 +36,7 @@
 
 <script>
 import axios from 'axios';
-import HelloWorld from '@/components/HelloWorld'
+import Train from '@/components/Train'
 import AppHeader from '@/components/AppHeader'
 
 
@@ -180,7 +180,7 @@ export default {
     this.startAppTime(this.runNextTrain())
   },
   components:{
-    HelloWorld,
+    Train,
     AppHeader
   }
 }

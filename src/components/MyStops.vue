@@ -3,7 +3,7 @@
     <AppHeader pageTitle="My Stops" hamburger="true" />
     <p v-if="email != ''">{{email}}</p>
     <div id="favorites">
-      <HelloWorld v-for="(s, index) in sortedArray" v-if="sortedArray.length > 0" :key="index" :star="true" :link="true" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :stationName="s.Name" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" />
+      <Train v-for="(s, index) in sortedArray" v-if="sortedArray.length > 0" :key="index" :star="true" :link="true" :address="s.Address" :lat="s.Lat" :lon="s.Lon" :stationName="s.Name" :code="s.Code" :lc1="s.LineCode1" :lc2="s.LineCode2" :lc3="s.LineCode3" :lc4="s.LineCode4" :lc5="s.LineCode5" />
       <p v-if="sortedArray.length <= 0">You don't have any stops. Go to the "All Trains" page and favorite some stations for them to show up on this page.</p>
     </div>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios';
-import HelloWorld from '@/components/HelloWorld'
+import Train from '@/components/Train'
 import AppHeader from '@/components/AppHeader'
 
 import firebase from 'firebase'
@@ -80,7 +80,7 @@ export default {
     }
   },
   components:{
-    HelloWorld,
+    Train,
     AppHeader
   }
 }

@@ -9,7 +9,7 @@
         <span v-if="lc3" class="line" :class="lc3"></span>
         <span v-if="lc4" class="line" :class="lc4"></span>
       </span>
-      <span @click="clickFav" v-if="link == true" class="favorite">
+      <span @click="clickFav" v-if="link == true && auth == true" class="favorite">
         <i v-if="favoriteStar == false && favs != code" class="far fa-star"></i>
         <i v-else class="fas fa-star"></i>
       </span>
@@ -27,7 +27,7 @@
       <span>{{address.Zip}}</span>
     </p>
     <div v-if="link == false" class="options">
-      <div @click="clickFav" class="btn">
+      <div @click="clickFav" class="btn" v-if="auth == true">
         <i v-if="favoriteStar == false && favs != code" class="far fa-star"></i>
         <i v-else class="fas fa-star"></i>
         <span>My Stop</span>
@@ -47,57 +47,44 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Train',
   props: ['stationName', 'code', 'lc1', 'lc2', 'lc3', 'lc4', 'lc5', 'link', 'address', 'lat', 'lon'],
   data () {
     return {
       map: false,
-      distance: '',
-      geo: false,
+      //distance: '',
+      //geo: false,
       favoriteStar: false,
       favs: [],
-      newFav: []
+      newFav: [],
+      auth: false
     }
   },
   methods: {
-    UserLocation(position) {
-      this.geo = true;
-      this.distance = this.calcCrow(position.coords.latitude, position.coords.longitude, this.lat, this.lon);
-    },
-    calcCrow(lat1, lon1, lat2, lon2) {
-      var R = 6371; // km
-      var dLat = this.toRad(lat2-lat1);
-      var dLon = this.toRad(lon2-lon1);
-      var lat1 = this.toRad(lat1);
-      var lat2 = this.toRad(lat2);
+    // UserLocation(position) {
+    //   this.geo = true;
+    //   this.distance = this.calcCrow(position.coords.latitude, position.coords.longitude, this.lat, this.lon);
+    // },
+    // calcCrow(lat1, lon1, lat2, lon2) {
+    //   var R = 6371; // km
+    //   var dLat = this.toRad(lat2-lat1);
+    //   var dLon = this.toRad(lon2-lon1);
+    //   var lat1 = this.toRad(lat1);
+    //   var lat2 = this.toRad(lat2);
 
-      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-      var d = R * c;
-      return d * 0.62137;
-    },
-    toRad(Value) {
-      return Value * Math.PI / 180;
-    },
-    round(num, places) {
-      var multiplier = Math.pow(10, places);
-      return Math.round(num * multiplier) / multiplier;
-    },
-    pageSwipeLeft(sel1, sel2, obj) {
-      $(sel1).swipe( {
-          swipeLeft:function(event, direction, distance, duration, fingerCount) {
-              $(sel2).css(obj);
-          }, threshold: 75
-      });
-    },
-    pageSwipeRight(sel1, sel2, obj) {
-      $(sel1).swipe( {
-          swipeRight:function(event, direction, distance, duration, fingerCount) {
-              $(this).css(obj);
-          }, threshold: 75
-      });
-    },
+    //   var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    //     Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    //   var d = R * c;
+    //   return d * 0.62137;
+    // },
+    // toRad(Value) {
+    //   return Value * Math.PI / 180;
+    // },
+    // round(num, places) {
+    //   var multiplier = Math.pow(10, places);
+    //   return Math.round(num * multiplier) / multiplier;
+    // },
     slugify(text) {
       return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
@@ -126,6 +113,7 @@ export default {
     //   navigator.geolocation.getCurrentPosition(this.UserLocation);
     // }
     if (firebase.auth().currentUser) {
+      this.auth = true;
       firebase.database().ref('users/'+firebase.auth().currentUser.uid+'/favorites').on('value', snap => {
         this.favs.push(snap.val())
         var fav; 
