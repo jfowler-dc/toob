@@ -47,12 +47,11 @@ export default {
     },
     loadFavorites() {
       if (Array.isArray(this.favorites)) {
-        var fav;
         this.allStations = [];
-        for (fav in this.favorites[this.favorites.length - 1]) {
+        for (var fav in this.favorites[this.favorites.length - 1]) {
           this.getStation(fav);
         }
-      }else {
+      } else {
         this.getStation([this.favorites[this.favorites.length - 1]])
       }
     }

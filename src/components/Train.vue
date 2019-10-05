@@ -101,7 +101,7 @@ export default {
         }.bind(this));
       } else {
         this.favoriteStar = false;
-        this.newFav = [];
+        //this.newFav = [];
         firebase.auth().onAuthStateChanged(function (user) {
           firebase.database().ref('/users').child(user.uid + '/favorites').update({[this.slugify(this.code)]: null})
         }.bind(this));
@@ -115,14 +115,26 @@ export default {
     if (firebase.auth().currentUser) {
       this.auth = true;
       firebase.database().ref('users/'+firebase.auth().currentUser.uid+'/favorites').on('value', snap => {
-        this.favs.push(snap.val())
-        var fav; 
-        for (fav in this.favs[this.favs.length - 1]) {
-          this.newFav.push(fav.toUpperCase());
+        let favorites = snap.val();
+        this.favs = []
+        for (var key in favorites) {
+          this.favs.push(key.toUpperCase())
         }
-        if (this.newFav.includes(this.code)) {
+
+        if (this.favs.includes(this.code)) {
           this.favoriteStar = true;
+        } else {
+          this.favoriteStar = false
         }
+
+        // this.favs.push(snap.val())
+        // var fav; 
+        // for (fav in this.favs[this.favs.length - 1]) {
+        //   this.newFav.push(fav.toUpperCase());
+        // }
+        // if (this.newFav.includes(this.code)) {
+        //   this.favoriteStar = true;
+        // }
       })
     }
   }
