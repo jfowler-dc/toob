@@ -44,13 +44,9 @@ export default {
   },
   methods: {
     getAllStations() {
-      let url = 'https://api.wmata.com/Rail.svc/json/jStations';
+      let url = 'https://api.jorofo.com/wmata/?url=jStations';
       axios
-        .get(url, {
-          headers: {
-            api_key: '6c0afb2a0f824f0f9b85bfd174ecae6d'
-          }
-        })
+        .get(url)
         .then(response => {
           this.allStations = response.data.Stations
         })

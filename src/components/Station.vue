@@ -63,13 +63,10 @@ export default {
   },
   methods: {
     theNextTrain() {
-      let url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + this.stationId;
+      let url = 'https://api.jorofo.com/wmata/?url=GetPrediction&stationId='+this.stationId
+      //let url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + this.stationId;
       axios
-        .get(url, {
-          headers: {
-            api_key: '6c0afb2a0f824f0f9b85bfd174ecae6d'
-          }
-        })
+        .get(url)
         .then(response => {
           this.nextTrains = response.data.Trains
         })
@@ -78,16 +75,9 @@ export default {
         });
     },
     getThisStation() {
-      let url = 'https://api.wmata.com/Rail.svc/json/jStationInfo';
+      let url = 'https://api.jorofo.com/wmata/?url=jStationInfo&stationCode=' + this.stationId;
       axios
-        .get(url, {
-          params: {
-            StationCode: this.stationId
-          },
-          headers: {
-            api_key: '6c0afb2a0f824f0f9b85bfd174ecae6d'
-          }
-        })
+        .get(url)
         .then(response => {
           this.allStations.push(response.data)
         })
@@ -96,16 +86,9 @@ export default {
         })
     },
     getStationTimes() {
-      let url = 'https://api.wmata.com/Rail.svc/json/jStationTimes';
+      let url = 'https://api.jorofo.com/wmata/?url=jStationInfo&stationCode=' + this.stationId;
       axios
-        .get(url, {
-          params: {
-            StationCode: this.stationId
-          },
-          headers: {
-            api_key: '6c0afb2a0f824f0f9b85bfd174ecae6d'
-          }
-        })
+        .get(url)
         .then(response => {
           this.stationTimes.push(response.data.StationTimes[0])
           this.startAppTime(this.makeTimer())

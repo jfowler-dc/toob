@@ -28,16 +28,9 @@ export default {
   },
   methods: {
     getStation(sCode) {
-      let url = 'https://api.wmata.com/Rail.svc/json/jStationInfo';
+      let url = 'https://api.jorofo.com/wmata/?url=jStationInfo&stationCode=' + sCode;
       axios
-        .get(url, {
-          params: {
-            StationCode: sCode
-          },
-          headers: {
-            api_key: '6c0afb2a0f824f0f9b85bfd174ecae6d'
-          }
-        })
+        .get(url)
         .then(response => {
           this.allStations.push(response.data)         
         })
