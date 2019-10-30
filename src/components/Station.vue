@@ -64,7 +64,6 @@ export default {
   methods: {
     theNextTrain() {
       let url = 'https://api.jorofo.com/wmata/?url=GetPrediction&stationId='+this.stationId
-      //let url = 'https://api.wmata.com/StationPrediction.svc/json/GetPrediction/' + this.stationId;
       axios
         .get(url)
         .then(response => {

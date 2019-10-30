@@ -70,17 +70,31 @@ export default {
         $(this).toggle($(this).find('.stationText').text().toLowerCase().indexOf(value) > -1)
       });
     },
+    getColor(color, colorCode) {
+      // debugger;
+      if (color == false) {
+        color = true;
+        this.selectedColors.push(colorCode)
+      } else {
+        color = false;
+        this.removeA(this.selectedColors, colorCode)
+      }
+      console.log(color)
+    },
     clickGetColorId(e) {
       $('#trains .border').hide()
       switch (e) {
         case 'RD':
-          if (this.red == false) {
-            this.red = true;
-            this.selectedColors.push('RD')
-          } else {
-            this.red = false;
-            this.removeA(this.selectedColors, 'RD')
-          }
+          let c = this.red;
+          //console.log(c)
+          // if (this.red == false) {
+          //   this.red = true;
+          //   this.selectedColors.push('RD')
+          // } else {
+          //   this.red = false;
+          //   this.removeA(this.selectedColors, 'RD')
+          // }
+          this.getColor(c, 'RD')
           break;
         case 'BL':
           if (this.blue == false) {
